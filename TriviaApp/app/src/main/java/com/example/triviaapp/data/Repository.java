@@ -46,14 +46,19 @@ public class Repository {
 
                                 // System.out.println(questionArrayList);
 
-                            } catch (JSONException e) {
+                            }
+
+                            catch (JSONException e) {
                                 e.printStackTrace();
                             }
                         }
+
+                        // using callBack here, check that ArrayList is filled before moving on, and retrieving in the mainActivity
+                        if (null != callBack){
+                            callBack.ProcessFinished(questionArrayList);
+                        }
                     }
                 },
-
-
 
                 // add questions to the ArrayList of Questions that we have created
 
@@ -66,10 +71,7 @@ public class Repository {
                 }
         );
 
-        // using callBack here, check that ArrayList is filled before moving on, and retrieving in the mainActivity
-        if (null != callBack){
-            callBack.ProcessFinished(questionArrayList);
-        }
+
 
         AppController.getInstance().addToRequestQueue(jsonArrayRequest);
         return questionArrayList;
