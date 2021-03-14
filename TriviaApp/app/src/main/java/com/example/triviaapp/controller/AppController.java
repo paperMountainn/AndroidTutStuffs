@@ -14,15 +14,6 @@ import com.android.volley.toolbox.Volley;
 public class AppController extends Application {
     private static AppController instance;
     private RequestQueue requestQueue;
-    private static Context ctx;
-
-    private AppController(Context context) {
-        ctx = context;
-
-        // get queue so that we can add to it
-        requestQueue = getRequestQueue();
-
-    }
 
     /**
      *
@@ -37,7 +28,7 @@ public class AppController extends Application {
         if (requestQueue == null) {
             // getApplicationContext() is key, it keeps you from leaking the
             // Activity or BroadcastReceiver if someone passes one in.
-            requestQueue = Volley.newRequestQueue(ctx.getApplicationContext());
+            requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
         return requestQueue;
     }
