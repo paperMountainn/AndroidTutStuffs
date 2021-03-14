@@ -1,8 +1,6 @@
 package com.example.triviaapp.controller;
 
 import android.app.Application;
-import android.content.Context;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -45,4 +43,6 @@ public class AppController extends Application {
         super.onCreate();
         instance = this;
     }
+
+
 }
