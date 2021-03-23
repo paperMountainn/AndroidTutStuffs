@@ -23,6 +23,7 @@ public class Repository {
 
     private ArrayList<Question> questionArrayList = new ArrayList<>();
 
+    //this method takes in an interface!
     public List<Question> getQuestions(final AnswerListAsyncResponse callBack){
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
