@@ -17,8 +17,6 @@ import com.example.triviaapp.data.Repository;
 import com.example.triviaapp.databinding.ActivityMainBinding;
 import com.example.triviaapp.model.Question;
 
-import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
 //
 //            }
 //        });
-        List<Question> questionList = new Repository().getQuestions(new AnswerListAsyncResponse() {
+
+        questionList = new Repository().getQuestions(new AnswerListAsyncResponse() {
 
             // ProcessFinished is overrode, this belongs to the interface AnswerListAsyncResponse
             // overriding the interface is compulsory
@@ -69,10 +68,15 @@ public class MainActivity extends AppCompatActivity {
         }
         );
 
+        // buttonNext when clicked, updates currentQuestionIndex
+        // then update the Question
         binding.buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentQuestionIndex = (currentQuestionIndex + 1);
+
+                // to avoid overflow, have this line of code
+                currentQuestionIndex = (currentQuestionIndex + 1) % questionList.size();
+                updateQuestion();
 
 
             }
@@ -92,6 +96,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    // method to update question
+    private void updateQuestion(){
+        String question = questionList.get(currentQuestionIndex).getQuestion();
+        binding.textViewQuestion.setText(question);
     }
 }
 
