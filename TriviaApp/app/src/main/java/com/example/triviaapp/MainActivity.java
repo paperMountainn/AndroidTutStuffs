@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -22,8 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    // these are instance variables that you can use everywhere in the class!
     private ActivityMainBinding binding;
     private int currentQuestionIndex;
+    List<Question> questionList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,27 +50,65 @@ public class MainActivity extends AppCompatActivity {
 //
 //            }
 //        });
-        new Repository().getQuestions(new AnswerListAsyncResponse() {
+        List<Question> questionList = new Repository().getQuestions(new AnswerListAsyncResponse() {
 
             // ProcessFinished is overrode, this belongs to the interface AnswerListAsyncResponse
             // overriding the interface is compulsory
             @Override
             public void ProcessFinished(ArrayList<Question> questionArrayList) {
+
+                // print out all the answers to check if we are getting the questions from the url
                 Log.d("hellooo", String.valueOf(questionArrayList));
 
                 // now we can use binding to retrieve that particular widget, and use their methods
-                // casted to a CharSequence
-                binding.textViewQuestion.setText((CharSequence) questionArrayList.get(currentQuestionIndex));
+                String questionText = questionArrayList.get(currentQuestionIndex).getQuestion();
+                binding.textViewQuestion.setText(questionText);
+
+
+            }
+        }
+        );
+
+        binding.buttonNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentQuestionIndex = (currentQuestionIndex + 1);
+
 
             }
         });
 
+        binding.buttonTrue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
 
+        binding.buttonFalse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-
+            }
+        });
 
     }
 }
 
-//hello
+    // you are obligated to override onClick if you implement onClickListener
+//    @Override
+//    public void onClick(View v) {
+//        switch (v.getId()){
+//            // this would be deprecated once gradle5 is around
+//            case R.id.buttonNext:
+//
+//                break;
+//            case R.id.buttonTrue:
+//                break;
+//            case R.id.buttonFalse:
+//                break;
+//        }
+//
+//    }
+//}
+
