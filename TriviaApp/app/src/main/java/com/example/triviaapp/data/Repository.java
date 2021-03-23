@@ -61,7 +61,6 @@ public class Repository {
                 },
 
                 // add questions to the ArrayList of Questions that we have created
-
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
