@@ -23,6 +23,7 @@ public class Repository {
 
     private ArrayList<Question> questionArrayList = new ArrayList<>();
 
+    //this method takes in an interface!
     public List<Question> getQuestions(final AnswerListAsyncResponse callBack){
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
@@ -46,17 +47,21 @@ public class Repository {
 
                                 // System.out.println(questionArrayList);
 
-                            } catch (JSONException e) {
+                            }
+
+                            catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                        }
+
+                        // using callBack here, check that ArrayList is filled before moving on, and retrieving in the mainActivity
+                        if (null != callBack){
+                            callBack.ProcessFinished(questionArrayList);
                         }
                     }
                 },
 
-
-
                 // add questions to the ArrayList of Questions that we have created
-
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
@@ -66,10 +71,7 @@ public class Repository {
                 }
         );
 
-        // using callBack here, check that ArrayList is filled before moving on, and retrieving in the mainActivity
-        if (null != callBack){
-            callBack.ProcessFinished(questionArrayList);
-        }
+
 
         AppController.getInstance().addToRequestQueue(jsonArrayRequest);
         return questionArrayList;
