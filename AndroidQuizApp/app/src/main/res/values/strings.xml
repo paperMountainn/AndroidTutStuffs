@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">AndroidQuizApp</string>
+    <string name="true_button_text">TRUE</string>
+    <string name="false_button_text">FALSE</string>
+    <string name="prev_button_text">Previous</string>
+    <string name="next_button_text">Next</string>
+    <string name="question_placeholder">Questions Here!</string>
+
+    <string name="Singapore_language">Singlish is Singapore\'s official language.</string>
+    <string name="Singapore_flower">The national flower of Singapore is Orchids.</string>
+    <string name="Singapore_anthem">Singapore\'s national anthem is in micro-text on the back of their $1000 note.</string>
+    <string name="Singapore_size">Singapore is the smallest country in the world. </string>
+
+    <string name="correct_answer">Correct!</string>
+    <string name="wrong_answer">Wrong!</string>
+</resources>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ActivityLifeCycleTestApp</string>
+    <string name="add_guess_hint_text">Enter your guess here!</string>
+    <string name="show_guess_button_text">Show Guess</string>
+</resources>
