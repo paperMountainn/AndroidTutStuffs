@@ -6,6 +6,9 @@ import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -16,6 +19,7 @@ import com.example.triviaapp.data.AnswerListAsyncResponse;
 import com.example.triviaapp.data.Repository;
 import com.example.triviaapp.databinding.ActivityMainBinding;
 import com.example.triviaapp.model.Question;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
             // ProcessFinished is overrode, this belongs to the interface AnswerListAsyncResponse
             // overriding the interface is compulsory
+            // after getting questions: do this
             @Override
             public void ProcessFinished(ArrayList<Question> questionArrayList) {
 
@@ -63,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
                 String questionText = questionArrayList.get(currentQuestionIndex).getQuestion();
                 binding.textViewQuestion.setText(questionText);
 
+                // set the 0/913 of the question
+                updateCounter(questionArrayList);
 
             }
         }
@@ -85,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
         binding.buttonTrue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                checkAnswer(true);
+                updateQuestion();
 
             }
         });
@@ -92,16 +101,47 @@ public class MainActivity extends AppCompatActivity {
         binding.buttonFalse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                checkAnswer(false);
+                updateQuestion();
+
 
             }
         });
 
     }
 
+    private void checkAnswer(boolean userChoice) {
+        String toastMessage;
+        boolean correctAnswer = questionList.get(currentQuestionIndex).isAnswerTrue();
+        if (userChoice == correctAnswer){
+            toastMessage = "You are correct!";
+        }
+        else {
+            toastMessage = "You are wrong!";
+            shakeAnimation();
+        }
+        Snackbar.make(binding.cardViewQuestion, toastMessage, Snackbar.LENGTH_LONG).show();
+
+    }
+
+    private void updateCounter(ArrayList<Question> questionArrayList) {
+        binding.textViewQuestionNum.setText(String.format(getString(R.string.question_out_of_formatted), currentQuestionIndex, questionArrayList.size()));
+    }
+
     // method to update question
     private void updateQuestion(){
         String question = questionList.get(currentQuestionIndex).getQuestion();
         binding.textViewQuestion.setText(question);
+        // update question, also update the counter based on currentQuestionIndex
+        updateCounter((ArrayList<Question>) questionList);
+    }
+
+    private void shakeAnimation(){
+        // get reference to animation res
+        Animation shake = AnimationUtils.loadAnimation(MainActivity.this, R.anim.shake_animation);
+
+        // attach to cardView
+        binding.cardViewQuestion.setAnimation(shake);
     }
 }
 
