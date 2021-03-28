@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FreeMoneyWOO</string>
+    <string name="Show_info">Show Info</string>
+    <string name="you_have">You have:</string>
+    <string name="amt_money">0</string>
+    <string name="make_it_rain">Make it Rain</string>
+    <string name="app_info">Get rich quick!!!!</string>
+</resources>
