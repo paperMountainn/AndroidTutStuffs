@@ -9,7 +9,7 @@ import com.android.volley.toolbox.Volley;
  * AppController contains all methods and propertiest that governs the entire app
  * you need to add it to AndroidManifest.xml so that it can be accessed app wide
  */
-public class AppController extends Application {
+public class  AppController extends Application {
     private static AppController instance;
     private RequestQueue requestQueue;
 
