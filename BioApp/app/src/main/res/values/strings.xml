@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">BioApp</string>
+    <string name="name">Paper Mountain</string>
+    <string name="bio">
+        Hello, my name is PaperMountain.
+        \n\n I am really hardworking, i wish to become fit one day, but i kept on eating junk food. I feel that i lack discipline.
+        Sometimes I wish that i can have more brainpower to think for code. I am sure that with more practice, i can do it.
+        \n\nCurrently, i am learning Android Dev for my school project. It feels that i wasted the last term trying to learn from the teacher
+        because the materials on Java is really not enough at all, especially the android programming portion.
+        \n\nI get stressed up easily
+        because of my personality and some previous bad habits that i have built up since secondary school. It has been affecting me alot,
+        its time to change it! I am sure that i can do this.
+    </string>
+    <string name="hobby_hint_text">Enter your hobbies</string>
+    <string name="done">Done</string>
+    <string name="descr">android icon</string>
+</resources>
