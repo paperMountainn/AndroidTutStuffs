@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private int currentQuestionIndex;
     List<Question> questionList;
+    private static final String SCORE_ID = "score_prefs";
+    private int score = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
                 // set the 0/913 of the question
                 updateCounter(questionArrayList);
 
+
+
+
             }
         }
         );
@@ -110,13 +115,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
     }
+
+
 
     private void checkAnswer(boolean userChoice) {
         String snackMessage;
         boolean correctAnswer = questionList.get(currentQuestionIndex).isAnswerTrue();
         if (userChoice == correctAnswer){
             snackMessage = "You are correct!";
+            score = score + 10;
             fadeAnimation();
         }
         else {
@@ -130,6 +139,9 @@ public class MainActivity extends AppCompatActivity {
     private void updateCounter(ArrayList<Question> questionArrayList) {
         binding.textViewQuestionNum.setText(String.format(getString(R.string.question_out_of_formatted), currentQuestionIndex, questionArrayList.size()));
     }
+
+
+
 
     // method to update question
     private void updateQuestion(){

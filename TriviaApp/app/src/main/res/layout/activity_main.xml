@@ -26,14 +26,13 @@
 
         <TextView
             android:id="@+id/textViewQuestionNum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_width="132dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="28dp"
             android:text="Question: 45 / 90"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
@@ -94,6 +93,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonFalse" />
+
+        <TextView
+            android:id="@+id/textViewScoreOutOf"
+            style="@style/mainTextStyle"
+            android:layout_width="64dp"
+            android:layout_height="31dp"
+            android:layout_marginTop="72dp"
+            android:text="score"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonNext" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
