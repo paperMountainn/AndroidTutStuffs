@@ -3,9 +3,11 @@ package com.example.triviaapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
@@ -111,16 +113,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkAnswer(boolean userChoice) {
-        String toastMessage;
+        String snackMessage;
         boolean correctAnswer = questionList.get(currentQuestionIndex).isAnswerTrue();
         if (userChoice == correctAnswer){
-            toastMessage = "You are correct!";
+            snackMessage = "You are correct!";
+            fadeAnimation();
         }
         else {
-            toastMessage = "You are wrong!";
+            snackMessage = "You are wrong!";
             shakeAnimation();
         }
-        Snackbar.make(binding.cardViewQuestion, toastMessage, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(binding.cardViewQuestion, snackMessage, Snackbar.LENGTH_LONG).show();
 
     }
 
@@ -142,6 +145,53 @@ public class MainActivity extends AppCompatActivity {
 
         // attach to cardView
         binding.cardViewQuestion.setAnimation(shake);
+
+        // upon shaking, also make the textview background red to indicate wrong answer
+        shake.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                binding.textViewQuestion.setTextColor(Color.RED);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                binding.textViewQuestion.setTextColor(Color.WHITE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+    }
+    private void fadeAnimation(){
+        // setting up
+        AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f, 0.0f);
+
+        // set duration etc
+        alphaAnimation.setDuration(300);
+        alphaAnimation.setRepeatCount(1);
+        alphaAnimation.setRepeatMode(Animation.REVERSE);
+
+        binding.cardViewQuestion.setAnimation(alphaAnimation);
+        alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                binding.textViewQuestion.setTextColor(Color.GREEN);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                binding.textViewQuestion.setTextColor(Color.WHITE);
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
     }
 }
 
